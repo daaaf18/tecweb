@@ -179,5 +179,23 @@ echo "\$e = " . (int)$e . "<br>";
 unset($a, $b, $c, $d, $e, $f);
 ?>
 
+<?php
+echo "<h2>Ejercicio 7</h2>";
+
+echo "<h3>a) Versión de Apache y PHP</h3>";
+if (isset($_SERVER['SERVER_SOFTWARE'])) {
+    echo "Servidor: " . $_SERVER['SERVER_SOFTWARE'] . "<br>";
+}
+echo "Versión de PHP: " . phpversion() . "<br>";
+
+echo "<h3>b) Nombre del sistema operativo (servidor)</h3>";
+echo php_uname('s') . "<br>";
+
+echo "<h3>c) Idioma del navegador (cliente)</h3>";
+if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+    echo $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "<br>";
+}
+?>
+
 </body>
 </html>
