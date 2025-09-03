@@ -106,5 +106,39 @@ echo "Tipo de \$z[0]: " . gettype($z[0]) . "<br><hr>";
 unset($a, $b, $c, $z);
 ?>
 
+<?php
+echo "<h2>Ejercicio 4</h2>";
+
+$a = "PHP5";
+$z[] = &$a;
+$b = "5a version de PHP";
+$c = $b * 10;
+$a .= $b;
+$b *= $c;
+$z[0] = "MySQL";
+
+function mostrarConGlobals() {
+    echo "<h3>Usando \$GLOBALS</h3>";
+    echo "\$a = " . $GLOBALS['a'] . "<br>";
+    echo "\$b = " . $GLOBALS['b'] . "<br>";
+    echo "\$c = " . $GLOBALS['c'] . "<br>";
+    echo "\$z[0] = " . $GLOBALS['z'][0] . "<br>";
+}
+
+function mostrarConGlobal() {
+    global $a, $b, $c, $z;
+    echo "<h3>Usando global</h3>";
+    echo "\$a = $a <br>";
+    echo "\$b = $b <br>";
+    echo "\$c = $c <br>";
+    echo "\$z[0] = {$z[0]} <br>";
+}
+
+mostrarConGlobals();
+mostrarConGlobal();
+
+unset($a, $b, $c, $z);
+?>
+
 </body>
 </html>
