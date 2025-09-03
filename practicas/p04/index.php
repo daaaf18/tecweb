@@ -154,5 +154,30 @@ echo "\$c = $c <br>";
 unset($a, $b, $c);
 ?>
 
+<?php
+echo "<h2>Ejercicio 6</h2>";
+
+$a = "0";
+$b = "TRUE";
+$c = FALSE;
+$d = ($a OR $b);
+$e = ($a AND $c);
+$f = ($a XOR $b);
+
+echo "<h3>Valores con var_dump()</h3>";
+var_dump($a);
+var_dump($b);
+var_dump($c);
+var_dump($d);
+var_dump($e);
+var_dump($f);
+
+echo "<h3>Valores de \$c y \$e con echo</h3>";
+echo "\$c = " . (int)$c . "<br>";
+echo "\$e = " . (int)$e . "<br>";
+
+unset($a, $b, $c, $d, $e, $f);
+?>
+
 </body>
 </html>
