@@ -61,5 +61,50 @@
 
         unset($a, $b, $c);
     ?>
+
+<?php
+echo "<h2>Ejercicio 3</h2>";
+
+$a = "PHP5";
+$z[] = &$a;
+
+echo "<h3>Después de \$a = 'PHP5' y \$z[] = &\$a</h3>";
+echo "\$a = $a <br>";
+echo "\$z[0] = {$z[0]} <br>";
+echo "Tipo de \$a: " . gettype($a) . "<br>";
+echo "Tipo de \$z[0]: " . gettype($z[0]) . "<br><hr>";
+
+$b = "5a version de PHP";
+echo "<h3>Después de \$b = '5a version de PHP'</h3>";
+echo "\$b = $b <br>";
+echo "Tipo de \$b: " . gettype($b) . "<br><hr>";
+
+$c = $b * 10;
+echo "<h3>Después de \$c = \$b * 10</h3>";
+echo "\$c = $c <br>";
+echo "Tipo de \$c: " . gettype($c) . "<br><hr>";
+
+$a .= $b;
+echo "<h3>Después de \$a .= \$b</h3>";
+echo "\$a = $a <br>";
+echo "\$z[0] = {$z[0]} <br>";
+echo "Tipo de \$a: " . gettype($a) . "<br>";
+echo "Tipo de \$z[0]: " . gettype($z[0]) . "<br><hr>";
+
+$b *= $c;
+echo "<h3>Después de \$b *= \$c</h3>";
+echo "\$b = $b <br>";
+echo "Tipo de \$b: " . gettype($b) . "<br><hr>";
+
+$z[0] = "MySQL";
+echo "<h3>Después de \$z[0] = 'MySQL'</h3>";
+echo "\$a = $a <br>";
+echo "\$z[0] = {$z[0]} <br>";
+echo "Tipo de \$a: " . gettype($a) . "<br>";
+echo "Tipo de \$z[0]: " . gettype($z[0]) . "<br><hr>";
+
+unset($a, $b, $c, $z);
+?>
+
 </body>
 </html>
