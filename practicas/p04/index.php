@@ -140,5 +140,19 @@ mostrarConGlobal();
 unset($a, $b, $c, $z);
 ?>
 
+<?php
+$a = "7 personas";
+$b = (integer) $a;
+$a = "9E3";
+$c = (double) $a;
+
+echo "<h2>Ejercicio 5</h2>";
+echo "\$a = $a <br>";
+echo "\$b = $b <br>";
+echo "\$c = $c <br>";
+
+unset($a, $b, $c);
+?>
+
 </body>
 </html>
