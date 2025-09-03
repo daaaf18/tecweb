@@ -30,5 +30,36 @@
         echo '<li>$house*5 es inválida porque el símbolo * no está permitido.</li>';
         echo '</ul>';
     ?>
+
+<h2>Ejercicio 2</h2>
+    <?php
+        $a = "ManejadorSQL";
+        $b = 'MySQL';
+        $c = &$a;
+
+        echo "<h3>Bloque inicial</h3>";
+        echo "\$a = $a <br>";
+        echo "\$b = $b <br>";
+        echo "\$c = $c <br>";
+
+        $a = "PHP server";
+        $b = &$a;
+
+        echo "<h3>Segundo bloque</h3>";
+        echo "\$a = $a <br>";
+        echo "\$b = $b <br>";
+        echo "\$c = $c <br>";
+
+        echo "<h3>Explicación</h3>";
+        echo "En el primer bloque, \$c es referencia de \$a, 
+        por lo que si cambia \$a también cambia \$c, 
+        pero \$b era independiente con valor 'MySQL'.<br>";
+        echo "En el segundo bloque, al hacer \$b = &\$a, 
+        \$b también se convierte en referencia de \$a. 
+        Entonces las tres variables (\$a, \$b y \$c) 
+        comparten el mismo valor: 'PHP server'.<br>";
+
+        unset($a, $b, $c);
+    ?>
 </body>
 </html>
