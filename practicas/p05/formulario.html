@@ -7,6 +7,7 @@
     ol, ul { list-style-type: none; }
   </style>
 </head>
+
 <body>
 
 <h1>Registro al Concurso &ldquo;Chidos mis Tenis&rdquo;</h1>
@@ -16,7 +17,20 @@ Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno d
 
 <form action="http://52.43.117.247/neo/classroom/tw/concurso.php" method="post">
 
-    <fieldset>
+  <fieldset>
+    <legend>Información Personal</legend>
+    <ul>
+      <li>Nombre: <input type="text" name="name" required></li>
+      <li>Dirección de E-mail: <input type="email" name="email" required></li>
+      <li>Número Telefónico: <input type="tel" name="phone"></li>
+      <li>Mis tenis son tan feos porque…<br>
+        <textarea name="story" rows="4" cols="60" maxlength="300"
+          placeholder="No más de 300 caracteres de longitud."></textarea>
+      </li>
+    </ul>
+  </fieldset>
+
+  <fieldset>
     <legend>Diseño personalizado del Tenis</legend>
 
     <fieldset>
@@ -57,9 +71,14 @@ Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno d
 
   </fieldset>
 
+  <p>
+    <input type="submit" value="¡Chidos mis Tenis!">
+    <input type="reset" value="Limpiar">
+  </p>
 
 </form>
 
 </body>
 </html>
+
 
