@@ -28,7 +28,6 @@ function generarSecuenciaImparParImpar() {
         if ($fila[0] % 2 != 0 && $fila[1] % 2 == 0 && $fila[2] % 2 != 0) {
             $condicion = true;
         }
-
     } while (!$condicion);
 
     $totalNumeros = $iteraciones * 3;
@@ -39,4 +38,21 @@ function generarSecuenciaImparParImpar() {
         "totalNumeros" => $totalNumeros
     ];
 }
+
+//Ejercicio3
+function buscarMultiploWhile($divisor) {
+    $num = rand(1, 999);
+    while ($num % $divisor != 0) {
+        $num = rand(1, 999);
+    }
+    return $num;
+}
+
+function buscarMultiploDoWhile($divisor) {
+    do {
+        $num = rand(1, 999);
+    } while ($num % $divisor != 0);
+    return $num;
+}
 ?>
+

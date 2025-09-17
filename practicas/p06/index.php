@@ -43,6 +43,24 @@ include("src/funciones.php");
 
     <hr>
 
+<h2>Ejercicio 3</h2>
+<p>Buscar el primer número aleatorio que sea múltiplo de un número dado (GET).</p>
+<p>Ejemplo: <b>http://localhost/tecweb/practicas/p06/index.php?divisor=7</b></p>
+
+<?php
+if (isset($_GET['divisor'])) {
+    $divisor = (int) $_GET['divisor'];
+
+    echo "<p><b>Con WHILE:</b> " . buscarMultiploWhile($divisor) . "</p>";
+    echo "<p><b>Con DO-WHILE:</b> " . buscarMultiploDoWhile($divisor) . "</p>";
+
+} else {
+    echo "<p>No se proporcionó divisor. Agrega en la URL: ?divisor=7</p>";
+}
+?>
+
+<hr>
+
     <h2>Ejemplo de POST</h2>
     <form action="index.php" method="post">
         Nombre: <input type="text" name="name"><br>
