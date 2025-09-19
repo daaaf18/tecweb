@@ -82,4 +82,73 @@ function validarEdadSexo($edad, $sexo) {
         return "Lo sentimos, no cumple con los requisitos.";
     }
 }
+
+//Ejercicio6
+function obtenerParqueVehicular() {
+    $vehiculos = [
+        "UBN6338" => [
+            "Auto" => ["marca" => "HONDA", "modelo" => 2020, "tipo" => "camioneta"],
+            "Propietario" => ["nombre" => "Alfonzo Esparza", "ciudad" => "Puebla, Pue.", "direccion" => "C.U., Jardines de San Manuel"]
+        ],
+        "UBN6339" => [
+            "Auto" => ["marca" => "MAZDA", "modelo" => 2019, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Ma. del Consuelo Molina", "ciudad" => "Puebla, Pue.", "direccion" => "97 oriente"]
+        ],
+        "XYZ1234" => [
+            "Auto" => ["marca" => "TOYOTA", "modelo" => 2021, "tipo" => "hatchback"],
+            "Propietario" => ["nombre" => "Luis Pérez", "ciudad" => "Puebla, Pue.", "direccion" => "Av. Reforma 45"]
+        ],
+        "ABC5678" => [
+            "Auto" => ["marca" => "NISSAN", "modelo" => 2020, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Ana López", "ciudad" => "Puebla, Pue.", "direccion" => "Calle 10 #5"]
+        ],
+        "DEF9012" => [
+            "Auto" => ["marca" => "FORD", "modelo" => 2018, "tipo" => "camioneta"],
+            "Propietario" => ["nombre" => "Carlos Sánchez", "ciudad" => "Puebla, Pue.", "direccion" => "Boulevard Atlixco 123"]
+        ],
+        "GHI3456" => [
+            "Auto" => ["marca" => "CHEVROLET", "modelo" => 2019, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Marta Ramírez", "ciudad" => "Puebla, Pue.", "direccion" => "Calle 22 #7"]
+        ],
+        "JKL7890" => [
+            "Auto" => ["marca" => "VOLKSWAGEN", "modelo" => 2022, "tipo" => "hatchback"],
+            "Propietario" => ["nombre" => "José García", "ciudad" => "Puebla, Pue.", "direccion" => "Av. Juárez 50"]
+        ],
+        "MNO2345" => [
+            "Auto" => ["marca" => "HYUNDAI", "modelo" => 2021, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Lucía Torres", "ciudad" => "Puebla, Pue.", "direccion" => "Calle 5 #12"]
+        ],
+        "PQR6789" => [
+            "Auto" => ["marca" => "KIA", "modelo" => 2020, "tipo" => "camioneta"],
+            "Propietario" => ["nombre" => "Miguel Ortega", "ciudad" => "Puebla, Pue.", "direccion" => "Av. Central 100"]
+        ],
+        "STU1234" => [
+            "Auto" => ["marca" => "MAZDA", "modelo" => 2019, "tipo" => "hatchback"],
+            "Propietario" => ["nombre" => "Paola Herrera", "ciudad" => "Puebla, Pue.", "direccion" => "Calle Luna 22"]
+        ],
+        "VWX5678" => [
+            "Auto" => ["marca" => "HONDA", "modelo" => 2018, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Fernando Díaz", "ciudad" => "Puebla, Pue.", "direccion" => "Av. Reforma 88"]
+        ],
+        "YZA9012" => [
+            "Auto" => ["marca" => "TOYOTA", "modelo" => 2022, "tipo" => "camioneta"],
+            "Propietario" => ["nombre" => "Sofía Martínez", "ciudad" => "Puebla, Pue.", "direccion" => "Calle Sol 10"]
+        ],
+        "BCD3456" => [
+            "Auto" => ["marca" => "NISSAN", "modelo" => 2021, "tipo" => "sedan"],
+            "Propietario" => ["nombre" => "Ricardo Gómez", "ciudad" => "Puebla, Pue.", "direccion" => "Av. 5 de Mayo 20"]
+        ],
+        "EFG7890" => [
+            "Auto" => ["marca" => "FORD", "modelo" => 2020, "tipo" => "hatchback"],
+            "Propietario" => ["nombre" => "Claudia Ruiz", "ciudad" => "Puebla, Pue.", "direccion" => "Calle Primavera 3"]
+        ],
+        "HIJ2345" => [
+            "Auto" => ["marca" => "CHEVROLET", "modelo" => 2019, "tipo" => "camioneta"],
+            "Propietario" => ["nombre" => "Andrés López", "ciudad" => "Puebla, Pue.", "direccion" => "Boulevard 15 de Mayo 45"]
+        ],
+    ];
+
+    return $vehiculos;
+}
+
 ?>

@@ -85,5 +85,40 @@ echo generarTablaASCII();
 
     <input type="submit" value="Enviar">
 </form>
+
+<hr>
+
+<h2>Ejercicio 6</h2>
+<p>Consulta el parque vehicular:</p>
+
+<form action="index.php" method="post">
+    <label for="matricula">Consultar por matrícula:</label>
+    <input type="text" name="matricula" id="matricula" placeholder="Ej: UBN6338">
+    <input type="submit" name="consultar" value="Buscar">
+    <input type="submit" name="consultar" value="Mostrar todos">
+</form>
+
+<br>
+
+<?php
+if (isset($_POST["consultar"])) {
+    $vehiculos = obtenerParqueVehicular();
+
+    if ($_POST["consultar"] === "Buscar" && !empty($_POST["matricula"])) {
+        $matricula = strtoupper($_POST["matricula"]);
+        if (isset($vehiculos[$matricula])) {
+            echo "<pre>";
+            print_r([$matricula => $vehiculos[$matricula]]);
+            echo "</pre>";
+        } else {
+            echo "<p>No se encontró vehículo con matrícula $matricula</p>";
+        }
+    } elseif ($_POST["consultar"] === "Mostrar todos") {
+        echo "<pre>";
+        print_r($vehiculos);
+        echo "</pre>";
+    }
+}
+?>
 </body>
 </html>
