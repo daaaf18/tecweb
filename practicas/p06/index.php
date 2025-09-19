@@ -6,6 +6,14 @@ include("src/funciones.php");
 <head>
     <meta charset="UTF-8">
     <title>Práctica 6</title>
+    <style>
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    padding: 20px;
+}
+</style>
 </head>
 <body>
     <h2>Ejercicio 1</h2>
@@ -91,7 +99,7 @@ echo generarTablaASCII();
 <h2>Ejercicio 6</h2>
 <p>Consulta el parque vehicular:</p>
 
-<form action="index.php" method="post">
+<form action="respuesta.php" method="post">
     <label for="matricula">Consultar por matrícula:</label>
     <input type="text" name="matricula" id="matricula" placeholder="Ej: UBN6338">
     <input type="submit" name="consultar" value="Buscar">
