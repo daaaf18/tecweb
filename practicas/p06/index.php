@@ -61,18 +61,29 @@ if (isset($_GET['divisor'])) {
 
 <hr>
 
-    <h2>Ejemplo de POST</h2>
-    <form action="index.php" method="post">
-        Nombre: <input type="text" name="name"><br>
-        Email: <input type="text" name="email"><br>
-        <input type="submit" value="Enviar">
-    </form>
-    <br>
-    <?php
-        if (isset($_POST["name"]) && isset($_POST["email"])) {
-            echo "<b>Nombre:</b> " . $_POST["name"] . "<br>";
-            echo "<b>Email:</b> " . $_POST["email"];
-        }
-    ?>
+<h2>Ejercicio 4</h2>
+<p>Arreglo de letras de la 'a' a la 'z' con índices ASCII 97 a 122:</p>
+
+<?php
+echo generarTablaASCII();
+?>
+
+<hr>
+
+<h2>Ejercicio 5</h2>
+<p>Formulario para verificar sexo y edad:</p>
+
+<form action="respuesta.php" method="post">
+    <label for="edad">Edad:</label>
+    <input type="number" name="edad" id="edad" required><br><br>
+
+    <label for="sexo">Sexo:</label>
+    <select name="sexo" id="sexo" required>
+        <option value="femenino">Femenino</option>
+        <option value="masculino">Masculino</option>
+    </select><br><br>
+
+    <input type="submit" value="Enviar">
+</form>
 </body>
 </html>

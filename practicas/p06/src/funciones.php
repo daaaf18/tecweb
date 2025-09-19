@@ -54,5 +54,32 @@ function buscarMultiploDoWhile($divisor) {
     } while ($num % $divisor != 0);
     return $num;
 }
-?>
 
+//Ejercicio4 
+function generarTablaASCII() {
+    $arreglo = [];
+
+    for ($i = 97; $i <= 122; $i++) {
+        $arreglo[$i] = chr($i);
+    }
+
+    $tabla = "<table border='1' cellpadding='5'>";
+    $tabla .= "<tr><th>Índice (ASCII)</th><th>Letra</th></tr>";
+    foreach ($arreglo as $key => $value) {
+        $tabla .= "<tr><td>$key</td><td>$value</td></tr>";
+    }
+    $tabla .= "</table>";
+
+    return $tabla;
+}
+
+//Ejercicio5
+function validarEdadSexo($edad, $sexo) {
+    $sexo = strtolower($sexo); // asegurar minúsculas
+    if ($sexo === "femenino" && $edad >= 18 && $edad <= 35) {
+        return "Bienvenida, usted está en el rango de edad permitido.";
+    } else {
+        return "Lo sentimos, no cumple con los requisitos.";
+    }
+}
+?>
