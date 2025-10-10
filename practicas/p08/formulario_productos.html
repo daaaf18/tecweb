@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Nuevos Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+    
+        #error-messages {
+            color: #D8000C;
+            background-color: #FFD2D2;
+            border: 1px solid #D8000C;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        #error-messages ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Registrar Nuevo Producto</h2>
+
+        <div id="error-messages"></div>
+
+        <form id="product-form" action="http://localhost:85/tecweb/practicas/p08/set_producto_v2.php" method="POST" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label for="nombre_producto">Nombre del Producto:</label>
+                <input type="text" id="nombre_producto" name="nombre_producto" maxlength="100">
+            </div>
+            
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" min="0.01" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="detalles">Detalles:</label>
+                <textarea id="detalles" name="detalles" maxlength="500"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="unidades">Unidades Disponibles:</label>
+                <input type="number" id="unidades" name="unidades" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen del Producto:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png, image/gif">
+            </div>
+
+            <button type="submit" class="btn">Registrar Producto</button>
+
+        </form>
+    </div>
+
+    <script>
+        // Obtenemos el formulario por su ID
+        const form = document.getElementById('product-form');
+        const errorContainer = document.getElementById('error-messages');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let errors = [];
+
+            // Obtenemos los valores de los campos
+            const nombre = document.getElementById('nombre_producto').value.trim();
+            const marca = document.getElementById('marca').value.trim();
+            const precio = parseFloat(document.getElementById('precio').value);
+            const unidades = parseInt(document.getElementById('unidades').value);
+            const imagen = document.getElementById('imagen').files[0];
+
+            // Validar que nombre y marca no estén vacíos
+            if (nombre === '') {
+                errors.push('El nombre del producto es obligatorio.');
+            }
+            if (marca === '') {
+                errors.push('La marca del producto es obligatoria.');
+            }
+
+            // Validar que el precio sea un número positivo
+            if (isNaN(precio) || precio <= 0) {
+                errors.push('El precio debe ser un número mayor a cero.');
+            }
+
+            // Validar que las unidades sea un número entero no negativo
+            if (isNaN(unidades) || unidades < 0) {
+                errors.push('Las unidades deben ser un número igual o mayor a cero.');
+            }
+
+            // Validar el tipo de archivo de la imagen (opcional)
+            if (imagen) { // Si se seleccionó un archivo
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!allowedTypes.includes(imagen.type)) {
+                    errors.push('El archivo de imagen debe ser de tipo JPG, PNG o GIF.');
+                }
+            }
+
+            if (errors.length > 0) {
+                errorContainer.style.display = 'block';
+                errorContainer.innerHTML = '<ul>' + errors.map(error => `<li>${error}</li>`).join('') + '</ul>';
+                window.scrollTo(0, 0);
+            } else {
+                errorContainer.style.display = 'none';
+                form.submit();
+            }
+        });
+    </script>
+
+</body>
+</html>
