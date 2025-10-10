@@ -1,48 +1,41 @@
 <?php
     $rows = array();
-    if(isset($_GET['tope'])) {
-        $tope = $_GET['tope'];
 
-        if (!empty($tope) && is_numeric($tope)) {
-            /** SE CREA EL OBJETO DE CONEXIÓN */
-            @$link = new mysqli('localhost', 'root', '', 'marketzone');
+    /** SE CREA EL OBJETO DE CONEXIÓN */
+    @$link = new mysqli('localhost', 'root', '', 'marketzone');
 
-            /** GESTIONAR EL ERROR DE CONEXIÓN */
-            if ($link->connect_errno) {
-                die('Falló la conexión: '.$link->connect_error.'<br/>');
-            }
-
-            /** Crear la consulta para seleccionar productos */
-            $sql = "SELECT * FROM productos WHERE unidades <= {$tope}";
-
-            /** Ejecutar la consulta */
-            if ( $result = $link->query($sql) ) {
-                /** Se extraen todas las filas del resultado en un arreglo asociativo */
-                $rows = $result->fetch_all(MYSQLI_ASSOC);
-
-                /** Liberar la memoria asociada al resultado */
-                $result->free();
-            }
-
-            $link->close();
-        } else {
-
-            $error = 'El parámetro "tope" debe ser un número válido.';
-        }
-    } else {
-
-        $error = 'Parámetro "tope" no detectado...';
+    /** GESTIONAR EL ERROR DE CONEXIÓN */
+    if ($link->connect_errno) {
+        die('Falló la conexión: '.$link->connect_error.'<br/>');
     }
+
+    /** * Crear la consulta para seleccionar todos los productos que no estén eliminados.
+     * Se asume que la columna 'eliminado' tiene un valor de 0 para productos vigentes
+     * y 1 para productos eliminados.
+     */
+    $sql = "SELECT * FROM productos WHERE eliminado = 0";
+
+    /** Ejecutar la consulta */
+    if ( $result = $link->query($sql) ) {
+        /** Se extraen todas las filas del resultado en un arreglo asociativo */
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+
+        /** Liberar la memoria asociada al resultado */
+        $result->free();
+    }
+
+    /** Cerrar la conexión */
+    $link->close();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Productos por Tope de Unidades</title>
+    <title>Productos Vigentes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <h3>Productos<?php echo isset($tope) ? $tope : ''; ?></h3>
+    <h3>Productos Vigentes</h3>
     <br/>
     
     <?php if (!empty($rows)) : ?>
@@ -76,13 +69,7 @@
         </table>
     <?php else : ?>
         <div class="alert alert-warning" role="alert">
-            <?php
-                if (isset($error)) {
-                    echo $error;
-                } else {
-                    echo 'No se encontraron productos con esa cantidad.';
-                }
-            ?>
+            No se encontraron productos vigentes.
         </div>
     <?php endif; ?>
 </body>

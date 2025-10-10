@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die('Falló la conexión: '.$link->connect_error.'<br/>');
     }
 
-    //Validar que el prooducto no exista
+    //Validar que el producto no exista
     $sql_check = "SELECT COUNT(*) as count FROM productos WHERE nombre = ? AND marca = ? AND modelo = ?";
     if ($stmt_check = $link->prepare($sql_check)) {
         $stmt_check->bind_param('sss', $nombre, $marca, $modelo);
@@ -53,10 +53,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if (!isset($error_message)) {
+            // >> Se define la variable con el valor por defecto
+            $eliminado = 0;
+
+            // >> Se agrega la columna 'eliminado' a la consulta INSERT
+            //$sql_insert = "INSERT INTO productos VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)";
+
             $sql_insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) VALUES (?, ?, ?, ?, ?, ?, ?)";
             
             if ($stmt_insert = $link->prepare($sql_insert)) {
-                $stmt_insert->bind_param('sssdiss', $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen_nombre);
+                // Se actualiza el bind_param con el nuevo tipo 'i' y la variable $eliminado
+                $stmt_insert->bind_param('sssdissi', $nombre, $marca, $modelo, $precio, $detalles, $unidades, $imagen_nombre, $eliminado);
                 
                 if ($stmt_insert->execute()) {
                     $success_message = "<h2>¡Producto registrado con éxito!</h2>";
@@ -70,6 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $success_message .= "<li><strong>Detalles:</strong> " . htmlspecialchars($detalles) . "</li>";
                     $success_message .= "<li><strong>Unidades:</strong> " . $unidades . "</li>";
                     $success_message .= "<li><strong>Ruta Imagen:</strong> " . htmlspecialchars($imagen_nombre) . "</li>";
+                    // >> Se añade el valor de 'eliminado' al resumen para verificación
+                    $success_message .= "<li><strong>Eliminado:</strong> " . $eliminado . "</li>";
                     $success_message .= "</ul>";
                 } else {
                     $error_message = 'El Producto no pudo ser insertado. Error: ' . $stmt_insert->error;
