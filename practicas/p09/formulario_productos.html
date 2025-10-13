@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Nuevos Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select { /* Se añade select al estilo */
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        
+        #error-messages {
+            color: #D8000C;
+            background-color: #FFD2D2;
+            border: 1px solid #D8000C;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        #error-messages ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Registrar Nuevo Producto</h2>
+
+        <div id="error-messages"></div>
+
+        <form id="product-form" action="http://localhost:85/tecweb/practicas/p08/set_producto_v2.php" method="POST" enctype="multipart/form-data">
+            
+            <div class="form-group">
+                <label for="nombre_producto">Nombre del Producto:</label>
+                <input type="text" id="nombre_producto" name="nombre_producto" maxlength="100">
+            </div>
+            
+            <div class="form-group">
+              <label for="marca">Marca:</label>
+              <select id="marca" name="marca">
+                    <option value="" selected disabled>-- Seleccione una marca --</option>
+                    <option value="Zara">Zara</option>
+                    <option value="Stradivarius">Stradivarius</option>
+                    <option value="H&M">H&M</option>
+                    <option value="Levis">Levi´s</option>
+                    <option value="Sanrio">Sanrio</option>
+                    <option value="Pull&Bear">Pull&Bear</option>
+                    <option value="Vans">Vans</option>
+                    <option value="Youngla">YoungLA</option>
+               </select>
+            </div>
+
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" maxlength="25">
+            </div>
+
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" min="100.00" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="detalles">Detalles:</label>
+                <textarea id="detalles" name="detalles" maxlength="250"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="unidades">Unidades Disponibles:</label>
+                <input type="number" id="unidades" name="unidades" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="imagen">Imagen del Producto:</label>
+                <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png, image/gif">
+            </div>
+
+            <input type="hidden" name="imagen_default" id="imagen_default" value="">
+
+            <button type="submit" class="btn">Registrar Producto</button>
+
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('product-form');
+        const errorContainer = document.getElementById('error-messages');
+
+        form.addEventListener('submit', function(event) {
+            // Prevenimos el envío automático para poder validar
+            event.preventDefault();
+
+            let errors = [];
+            
+            // Obtención de valores de los campos
+            const nombre = document.getElementById('nombre_producto').value.trim();
+            const marca = document.getElementById('marca').value;
+            const modelo = document.getElementById('modelo').value.trim();
+            const precio = document.getElementById('precio').value;
+            const detalles = document.getElementById('detalles').value.trim();
+            const unidades = document.getElementById('unidades').value;
+            const imagenInput = document.getElementById('imagen');
+            const imagen = imagenInput.files[0];
+
+            // Validar texto alfanumérico (letras, números y espacios)
+            const alphanumericRegex = /^[a-zA-Z0-9\s.,-]+$/;
+
+            // Validaciones
+
+            // a. El nombre debe ser requerido y tener 100 caracteres o menos.
+            if (nombre === '') {
+                errors.push('El nombre del producto es obligatorio.');
+            }
+
+            // b. La marca debe ser requerida y seleccionarse de una lista de opciones.
+            if (marca === '') {
+                errors.push('Debe seleccionar una marca de la lista.');
+            }
+
+            // c. El modelo debe ser requerido, texto alfanumérico y tener 25 caracteres o menos.
+            if (modelo === '') {
+                errors.push('El modelo es obligatorio.');
+            } else if (!alphanumericRegex.test(modelo)) {
+                errors.push('El modelo solo puede contener letras, números y espacios.');
+            }
+
+            // d. El precio debe ser requerido y debe ser mayor a 99.99.
+            if (precio === '') {
+                errors.push('El precio es obligatorio.');
+            } else if (isNaN(parseFloat(precio)) || parseFloat(precio) <= 99.99) {
+                errors.push('El precio debe ser un número mayor a 99.99.');
+            }
+
+            // e. Los detalles deben ser opcionales y, de usarse, deben tener 250 caracteres o menos.
+            // La validación de longitud máxima la hace el atributo 'maxlength' del textarea.
+            // No se necesita validación JS adicional para este punto específico.
+
+            // f. Las unidades deben ser requeridas y el número registrado debe ser mayor o igual a 0.
+            if (unidades === '') {
+                errors.push('Las unidades disponibles son obligatorias.');
+            } else if (isNaN(parseInt(unidades)) || parseInt(unidades) < 0) {
+                errors.push('Las unidades deben ser un número igual o mayor a cero.');
+            }
+
+            // g. La ruta de la imagen debe ser opcional.
+             if (imagen) { // Si se seleccionó un archivo, validar su tipo
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                if (!allowedTypes.includes(imagen.type)) {
+                    errors.push('El archivo de imagen debe ser de tipo JPG, PNG o GIF.');
+                }
+            }
+
+
+            // --- Muestra de errores o envío del formulario ---
+            if (errors.length > 0) {
+                errorContainer.style.display = 'block';
+                errorContainer.innerHTML = '<ul>' + errors.map(error => `<li>${error}</li>`).join('') + '</ul>';
+                window.scrollTo(0, 0); // Lleva al usuario al inicio para ver los errores
+            } else {
+                // Si no hay errores, se oculta el contenedor de errores
+                errorContainer.style.display = 'none';
+
+                // g. Si no se registró imagen, se usa una por defecto.
+                // Le damos un valor al campo oculto que el backend deberá interpretar.
+                if (imagenInput.files.length === 0) {
+                    document.getElementById('imagen_default').value = 'images/productos/default.png';
+                }
+
+                // Todos los datos son válidos, se envía el formulario
+                form.submit();
+            }
+        });
+    </script>
+
+</body>
+</html>
