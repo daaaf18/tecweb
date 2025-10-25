@@ -83,9 +83,12 @@ function listarProductos() {
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td><a href="#" class="product-edit">${producto.nombre}</a></td>
+                            <td>${producto.nombre}</td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
+                                <button class="product-edit btn btn-warning btn-sm">
+                                    Editar
+                                </button>
                                 <button class="product-delete btn btn-danger btn-sm">
                                     Eliminar
                                 </button>
@@ -124,9 +127,12 @@ function buscarProducto(search) {
                     template += `
                         <tr productId="${producto.id}">
                             <td>${producto.id}</td>
-                            <td><a href="#" class="product-edit">${producto.nombre}</a></td>
+                            <td>${producto.nombre}</td>
                             <td><ul>${descripcion}</ul></td>
                             <td>
+                                <button class="product-edit btn btn-warning btn-sm">
+                                    Editar
+                                </button>
                                 <button class="product-delete btn btn-danger btn-sm">
                                     Eliminar
                                 </button>
@@ -162,14 +168,45 @@ function agregarProducto(e) {
     var finalJSON = JSON.parse(productoJsonString);
     finalJSON['nombre'] = $('#name').val();
     finalJSON['id'] = $('#productId').val();
-    productoJsonString = JSON.stringify(finalJSON, null, 2);
 
     /**
-     * AQUÍ DEBES AGREGAR LAS VALIDACIONES DE LOS DATOS EN EL JSON
-     * ...
-     * 
-     * --> EN CASO DE NO HABER ERRORES, SE ENVÍA EL PRODUCTO A AGREGAR
+     * VALIDACIONES DE LOS DATOS EN EL JSON
      */
+    
+    // Validar nombre
+    if (!finalJSON['nombre'] || finalJSON['nombre'].trim() === '') {
+        alert('ERROR: El nombre del producto es obligatorio');
+        return;
+    }
+
+    // Validar precio
+    if (finalJSON['precio'] < 0) {
+        alert('ERROR: El precio debe ser mayor o igual a 0');
+        return;
+    }
+
+    // Validar unidades
+    if (finalJSON['unidades'] < 1) {
+        alert('ERROR: Las unidades deben ser al menos 1');
+        return;
+    }
+
+    // Validar que los campos no estén vacíos
+    if (!finalJSON['marca'] || finalJSON['marca'].trim() === '') {
+        alert('ERROR: La marca es obligatoria');
+        return;
+    }
+
+    if (!finalJSON['modelo'] || finalJSON['modelo'].trim() === '') {
+        alert('ERROR: El modelo es obligatorio');
+        return;
+    }
+
+    /**
+     * --> EN CASO DE NO HABER ERRORES, SE ENVÍA EL PRODUCTO A AGREGAR/EDITAR
+     */
+    
+    productoJsonString = JSON.stringify(finalJSON, null, 2);
 
     // Determinar la URL según si estamos editando o agregando
     var url = edit === false ? './backend/product-add.php' : './backend/product-edit.php';
@@ -206,12 +243,9 @@ function agregarProducto(e) {
 }
 
 // FUNCIÓN PARA EDITAR PRODUCTO
-function editarProducto(element) {
-    // Prevenir comportamiento por defecto del enlace
-    event.preventDefault();
-    
+function editarProducto(button) {
     // Obtener el ID del producto desde el atributo productId del tr
-    var row = element.closest('tr');
+    var row = button.closest('tr');
     var id = row.attr('productId');
     
     // Hacer una petición para obtener los datos del producto
