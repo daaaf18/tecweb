@@ -1,4 +1,5 @@
 <?php
+/*
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
@@ -48,4 +49,14 @@
     
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+    */
+
+    use TECWEB\MYAPI\Products as Products;
+    require_once __DIR__ . '/myapi/Products.php';
+
+    $prodObj = new Products('marketzone');
+    // El método search() recibe el término de búsqueda de $_GET
+    $prodObj->search($_GET['search']);
+
+    echo $prodObj->getData();
 ?>

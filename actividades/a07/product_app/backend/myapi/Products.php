@@ -165,7 +165,7 @@ class Products extends DataBase {
         $this->data = array();
         $id = $this->conexion->real_escape_string($id);
         
-        // Nota: Esta es una eliminación lógica (soft delete), ¡muy bien!
+        // Nota: Esta es una eliminación lógica (soft delete)
         $sql = "UPDATE productos SET eliminado = 1 WHERE id = {$id}";
         
         if($this->conexion->query($sql)){
