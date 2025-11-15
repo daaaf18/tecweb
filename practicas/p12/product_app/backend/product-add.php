@@ -1,9 +1,9 @@
 <?php
-    use TECWEB\MYAPI\Products as Products;
-    require_once __DIR__ . '/myapi/Products.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
 
-    $prodObj = new Products('marketzone');
-    // El método add() recibe el array $_POST
+    use TECWEB\MYAPI\Create\Create;
+
+    $prodObj = new Create('marketzone');
     $prodObj->add($_POST);
 
     echo $prodObj->getData();

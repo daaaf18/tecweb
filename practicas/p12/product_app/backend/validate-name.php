@@ -1,9 +1,8 @@
 <?php
-    use TECWEB\MYAPI\Products as Products;
-    require_once __DIR__ . '/myapi/Products.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
+    use TECWEB\MYAPI\Read\Read;
 
-    $prodObj = new Products('marketzone');
-    // Usa el método singleByName()
+    $prodObj = new Read('marketzone');
     $prodObj->singleByName($_POST['nombre']);
 
     echo $prodObj->getData();

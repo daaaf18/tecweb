@@ -5,7 +5,7 @@ use TECWEB\MYAPI\DataBase;
 
 class Delete extends DataBase {
     
-    public function __construct($db, $user='root', $pass='12345678a') {
+    public function __construct($db, $user='root', $pass='') {
         parent::__construct($user, $pass, $db);
     }
 

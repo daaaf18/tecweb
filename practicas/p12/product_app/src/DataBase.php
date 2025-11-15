@@ -18,8 +18,8 @@ abstract class DataBase {
         );
 
         if(!$this->conexion) {
-            die('¡Base de datos NO conectada!');
-        }
+        die('¡Base de datos NO conectada! Error: ' . mysqli_connect_error());
+    }
         
         // Aseguración de la codificación
         $this->conexion->set_charset("utf8");
