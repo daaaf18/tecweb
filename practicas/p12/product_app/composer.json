@@ -1,0 +1,17 @@
+{
+    "name": "tecweb/marketzone",
+    "description": "API de productos para Marketzone usando PSR-4",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Tu Nombre",
+            "email": "tu@email.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "TECWEB\\MYAPI\\": "src/"
+        }
+    }
+}
