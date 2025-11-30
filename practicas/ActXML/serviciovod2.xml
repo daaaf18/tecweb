@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CatalogoVOD>
+    <cuenta correo="dafnecirnehernandez15@gmail.com">
+        <perfiles>
+            <perfil usuario="Daaaf" idioma="Español"/>
+            <perfil usuario="Wispy" idioma="Inglés"/>
+        </perfiles>
+    </cuenta>
+    <contenido>
+        <peliculas>
+            <genero nombre="Comedia">
+                <titulo nombre="Nosotros los nobles" duracion="148 min"/>
+                <titulo nombre="Una esposa de mentira" duracion="169 min"/>
+                <titulo nombre="Son como niños" duracion="164 min"/>
+                <titulo nombre="¿Donde están las rubias?" duracion="155 min"/>
+            </genero>
+            <genero nombre="Romance">
+                <titulo nombre="A dos metros de ti" duracion="113 min"/>
+                <titulo nombre="Una vida en un año" duracion="94 min"/>
+                <titulo nombre="Your name" duracion="94 min"/>
+                <titulo nombre="La la land" duracion="90 min"/>
+            </genero>
+        </peliculas>
+        <programas>
+            <genero nombre="Drama">
+                <titulo nombre="Breaking Bad" duracion="5 temporadas"/>
+                <titulo nombre="The Crown" duracion="6 temporadas"/>
+                <titulo nombre="La casa de papel" duracion="6 temporadas"/>
+                <titulo nombre="The last of us" duracion="7 temporadas"/>
+            </genero>
+            <genero nombre="Anime">
+                <titulo nombre="One piece" duracion="21 temporadas"/>
+                <titulo nombre="Kimetsu No Yaiba" duracion="4 temporadas"/>
+                <titulo nombre="Bungo Stray Dogs" duracion="4 temporadas"/>
+                <titulo nombre="Solo leveling" duracion="1 temporada"/>
+            </genero>
+        </programas>
+    </contenido>
+</CatalogoVOD>
